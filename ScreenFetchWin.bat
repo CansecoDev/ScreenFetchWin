@@ -18,3 +18,8 @@ for /f "tokens=4-5 delims=. " %%i in ('ver') do set VERSION=%%i.%%j
 if "%version%" == "10.0" set version=Windows 10
 if "%version%" == "6.3" set version=Windows 8.1
 if "%version%" == "6.2" set version=Windows 8
+
+:: Resolution
+for /f "delims=" %%# in  ('"wmic desktopmonitor get screenheight, screenwidth /format:value"') do (
+  set "%%#">nul
+)
