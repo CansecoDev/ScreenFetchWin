@@ -23,3 +23,8 @@ if "%version%" == "6.2" set version=Windows 8
 for /f "delims=" %%# in  ('"wmic desktopmonitor get screenheight, screenwidth /format:value"') do (
   set "%%#">nul
 )
+
+rem :: CPU name
+for /f "delims=" %%# in  ('"wmic cpu get name /format:value"') do (
+  set "%%#">nul
+)
