@@ -28,3 +28,8 @@ rem :: CPU name
 for /f "delims=" %%# in  ('"wmic cpu get name /format:value"') do (
   set "%%#">nul
 )
+
+rem :: Ram
+for /f "delims=" %%# in  ('"wmic ComputerSystem get TotalPhysicalMemory /format:value"') do (
+  set "%%#">nul
+)
