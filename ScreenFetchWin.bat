@@ -40,3 +40,8 @@ FOR /F "usebackq tokens=1,2" %%f IN (`PowerShell -NoProfile -EncodedCommand "CgB
 rem :: Boot time
 for /f %%a in ('WMIC OS GET lastbootuptime ^| find "."') DO set DTS=%%a 
 set BOOTTIME=%DTS:~0,4%-%DTS:~4,2%-%DTS:~6,2%  %DTS:~8,2%:%DTS:~10,2%
+
+
+rem :: GPU Name
+for /F "tokens=* skip=1" %%n in ('WMIC path Win32_VideoController get Name ^| findstr "."') do set GPU_NAME=%%n 
+
