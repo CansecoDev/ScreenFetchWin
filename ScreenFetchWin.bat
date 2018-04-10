@@ -45,3 +45,6 @@ set BOOTTIME=%DTS:~0,4%-%DTS:~4,2%-%DTS:~6,2%  %DTS:~8,2%:%DTS:~10,2%
 rem :: GPU Name
 for /F "tokens=* skip=1" %%n in ('WMIC path Win32_VideoController get Name ^| findstr "."') do set GPU_NAME=%%n 
 
+rem :: x86 x64
+IF EXIST "%PROGRAMFILES(X86)%" (set bit=x64) ELSE (set bit=x86) 
+
