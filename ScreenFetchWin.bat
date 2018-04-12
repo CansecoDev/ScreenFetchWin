@@ -48,3 +48,12 @@ for /F "tokens=* skip=1" %%n in ('WMIC path Win32_VideoController get Name ^| fi
 rem :: x86 x64
 IF EXIST "%PROGRAMFILES(X86)%" (set bit=x64) ELSE (set bit=x86) 
 
+rem ::Disk space
+set /a total=%F%+%U%
+
+rem :: In line 55 have a error because UFT8 dont work fine
+set ESC=
+set RD=%ESC%[31m
+set GN=%ESC%[32m
+set YW=%ESC%[33m
+set BL=%ESC%[34m
