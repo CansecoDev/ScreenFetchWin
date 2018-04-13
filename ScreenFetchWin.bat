@@ -57,3 +57,23 @@ set RD=%ESC%[31m
 set GN=%ESC%[32m
 set YW=%ESC%[33m
 set BL=%ESC%[34m
+
+
+cls
+echo %RD%                 
+echo %RD%            _,.-:--._ %GN%          		      
+echo %RD%           /::::::::::/ %GN%;--._...,_		      
+echo %RD%          /::::::::::/ %GN%/:::::::::/                  
+echo %RD%         /::::::::::/ %GN%/:::::::::/	      
+echo %RD%        /::::::::::/ %GN%/:::::::::/        %GN%OS: %version% (%bit%)         
+echo %RD%       /,.-:''-,_ / %GN%/:::::::::/      %GN%Drive: %Total% GB (C:)
+echo %BL%        _,.-:--._ %GN% /:-.:--:../         %GN%CPU: %name%
+echo %BL%      /::::::::::/ %YW%;--._...,_	       %GN%GPU: %GPU_NAME%
+echo %BL%     /::::::::::/ %YW%/:::::::::/   %GN%Resolution: %screenwidth% x %screenheight%
+echo %BL%    /::::::::::/ %YW%/:::::::::/	       %GN%RAM: %TotalPhysicalMemory% Bytes
+echo %BL%   /::::::::::/ %YW%/:::::::::/     %GN% Boot Time: %BOOTTIME%
+echo %BL%  /_,.--::-._/%YW% /:::::::::/
+echo %BL% ^           %YW%  /:-.:--:../
+echo:
+echo %GN% - github.com/SegoCode
+
