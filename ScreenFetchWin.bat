@@ -77,3 +77,5 @@ echo %BL% ^           %YW%  /:-.:--:../
 echo:
 echo %GN% - github.com/SegoCode
 
+pause > nul
+exit
