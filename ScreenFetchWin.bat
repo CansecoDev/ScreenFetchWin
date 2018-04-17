@@ -53,7 +53,7 @@ IF EXIST "%PROGRAMFILES(X86)%" (set bit=x64) ELSE (set bit=x86)
 rem ::Disk space
 set /a total=%F%+%U%
 
-rem :: In line 55 have a error because format error
+rem :: In line 55 have a error because format not supported
 set ESC=
 set RD=%ESC%[31m
 set GN=%ESC%[32m
