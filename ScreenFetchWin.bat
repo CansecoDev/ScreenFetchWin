@@ -34,7 +34,9 @@ for /f "delims=" %%# in  ('"wmic ComputerSystem get TotalPhysicalMemory /format:
   set "%%#">nul
 )
 
-Rem :: Disk
+:: Disk
+:: Decode: gwmi Win32_LogicalDisk -Filter "Caption='C:'"|%{$g=1073741824;[int]$f=($_.FreeSpace/$g);[int]$t=($_.Size/$g);Write-Host ($t-$f),$f}
+:: How to decode: [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String(' BASE 64 CODE HERE '))
 FOR /F "usebackq tokens=1,2" %%f IN (`PowerShell -NoProfile -EncodedCommand "CgBnAHcAbQBpACAAVwBpAG4AMwAyAF8ATABvAGcAaQBjAGEAbABEAGkAcwBrACAALQBGAGkAbAB0AGUAcgAgACIAQwBhAHAAdABpAG8AbgA9ACcAQwA6ACcAIgB8ACUAewAkAGcAPQAxADAANwAzADcANAAxADgAMgA0ADsAWwBpAG4AdABdACQAZgA9ACgAJABfAC4ARgByAGUAZQBTAHAAYQBjAGUALwAkAGcAKQA7AFsAaQBuAHQAXQAkAHQAPQAoACQAXwAuAFMAaQB6AGUALwAkAGcAKQA7AFcAcgBpAHQAZQAtAEgAbwBzAHQAIAAoACQAdAAtACQAZgApACwAJABmAH0ACgA="`) DO ((SET U=%%f)&(SET F=%%g))
 
 rem :: Boot time
@@ -51,7 +53,7 @@ IF EXIST "%PROGRAMFILES(X86)%" (set bit=x64) ELSE (set bit=x86)
 rem ::Disk space
 set /a total=%F%+%U%
 
-rem :: In line 55 have a error because UFT8 dont work fine
+rem :: In line 55 have a error because format error
 set ESC=
 set RD=%ESC%[31m
 set GN=%ESC%[32m
