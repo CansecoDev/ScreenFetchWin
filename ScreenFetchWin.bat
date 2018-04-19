@@ -24,12 +24,12 @@ for /f "delims=" %%# in  ('"wmic desktopmonitor get screenheight, screenwidth /f
   set "%%#">nul
 )
 
-rem :: CPU name
+:: CPU name
 for /f "delims=" %%# in  ('"wmic cpu get name /format:value"') do (
   set "%%#">nul
 )
 
-rem :: Ram
+:: Ram
 for /f "delims=" %%# in  ('"wmic ComputerSystem get TotalPhysicalMemory /format:value"') do (
   set "%%#">nul
 )
@@ -39,21 +39,20 @@ for /f "delims=" %%# in  ('"wmic ComputerSystem get TotalPhysicalMemory /format:
 :: How to decode: [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String(' BASE 64 CODE HERE '))
 FOR /F "usebackq tokens=1,2" %%f IN (`PowerShell -NoProfile -EncodedCommand "CgBnAHcAbQBpACAAVwBpAG4AMwAyAF8ATABvAGcAaQBjAGEAbABEAGkAcwBrACAALQBGAGkAbAB0AGUAcgAgACIAQwBhAHAAdABpAG8AbgA9ACcAQwA6ACcAIgB8ACUAewAkAGcAPQAxADAANwAzADcANAAxADgAMgA0ADsAWwBpAG4AdABdACQAZgA9ACgAJABfAC4ARgByAGUAZQBTAHAAYQBjAGUALwAkAGcAKQA7AFsAaQBuAHQAXQAkAHQAPQAoACQAXwAuAFMAaQB6AGUALwAkAGcAKQA7AFcAcgBpAHQAZQAtAEgAbwBzAHQAIAAoACQAdAAtACQAZgApACwAJABmAH0ACgA="`) DO ((SET U=%%f)&(SET F=%%g))
 
-rem :: Boot time
+:: Boot time
 for /f %%a in ('WMIC OS GET lastbootuptime ^| find "."') DO set DTS=%%a 
 set BOOTTIME=%DTS:~0,4%-%DTS:~4,2%-%DTS:~6,2%  %DTS:~8,2%:%DTS:~10,2%
 
 
-rem :: GPU Name
+:: GPU Name
 for /F "tokens=* skip=1" %%n in ('WMIC path Win32_VideoController get Name ^| findstr "."') do set GPU_NAME=%%n 
 
-rem :: x86 x64
+:: x86 x64
 IF EXIST "%PROGRAMFILES(X86)%" (set bit=x64) ELSE (set bit=x86) 
 
-rem ::Disk space
+::Disk space
 set /a total=%F%+%U%
-
-rem :: In line 55 have a error because format not supported
+:: In line 55 have a error because format not supported
 set ESC=
 set RD=%ESC%[31m
 set GN=%ESC%[32m
