@@ -52,7 +52,7 @@ IF EXIST "%PROGRAMFILES(X86)%" (set bit=x64) ELSE (set bit=x86)
 
 ::Disk space
 set /a total=%F%+%U%
-:: In line 55 have a error because format not supported
+:: In line 56 have a error format in github code viewer
 set ESC=
 set RD=%ESC%[31m
 set GN=%ESC%[32m
