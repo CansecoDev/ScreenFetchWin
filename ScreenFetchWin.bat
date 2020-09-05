@@ -1,82 +1,67 @@
 @echo off
+setlocal EnableDelayedExpansion
 mode con:cols=110 lines=18
-title ScreenfetchWin
-
+title github.com/SegoCode
+cls
 echo loading...
- :: ScreenFetchWin Software License
- :: 
- :: It's free to use for everyone, always, in all environments.
- :: Under no circumstances can our software be monetized for commercial or any other purposes.
- ::
- :: ScreenFetchWin comes with NO WARRANTY. We are not responsible for any damages.
- :: You can edit, break, and modify the program for your own personal and academic use.
- :: You cannot sell, modify and/or repackage our software and redistribute it.
- :: In short, don't be an asshole and you're good.
 
-:: Version
-for /f "tokens=4-5 delims=. " %%i in ('ver') do set VERSION=%%i.%%j
-if "%version%" == "10.0" set version=Windows 10
-if "%version%" == "6.3" set version=Windows 8.1
-if "%version%" == "6.2" set version=Windows 8
+set logo1=  [48;5;202m  [48;5;202m  [48;5;202m  [48;5;202m  [48;5;202m  [48;5;202m  [m  [48;5;41m  [48;5;41m  [48;5;41m  [48;5;41m  [48;5;41m  [48;5;41m  [m
+set logo2=  [48;5;32m  [48;5;32m  [48;5;32m  [48;5;32m  [48;5;32m  [48;5;32m  [m  [48;5;220m  [48;5;220m  [48;5;220m  [48;5;220m  [48;5;220m  [48;5;220m  [m
 
-:: Resolution
-for /f "delims=" %%# in  ('"wmic desktopmonitor get screenheight, screenwidth /format:value"') do (
-  set "%%#">nul
-)
-
-:: CPU name
-for /f "delims=" %%# in  ('"wmic cpu get name /format:value"') do (
-  set "%%#">nul
-)
-
-:: Ram
-for /f "delims=" %%# in  ('"wmic ComputerSystem get TotalPhysicalMemory /format:value"') do (
-  set "%%#">nul
-)
-
-:: Disk
-:: Decode: gwmi Win32_LogicalDisk -Filter "Caption='C:'"|%{$g=1073741824;[int]$f=($_.FreeSpace/$g);[int]$t=($_.Size/$g);Write-Host ($t-$f),$f}
 :: How to decode: [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String(' BASE 64 CODE HERE '))
-FOR /F "usebackq tokens=1,2" %%f IN (`PowerShell -NoProfile -EncodedCommand "CgBnAHcAbQBpACAAVwBpAG4AMwAyAF8ATABvAGcAaQBjAGEAbABEAGkAcwBrACAALQBGAGkAbAB0AGUAcgAgACIAQwBhAHAAdABpAG8AbgA9ACcAQwA6ACcAIgB8ACUAewAkAGcAPQAxADAANwAzADcANAAxADgAMgA0ADsAWwBpAG4AdABdACQAZgA9ACgAJABfAC4ARgByAGUAZQBTAHAAYQBjAGUALwAkAGcAKQA7AFsAaQBuAHQAXQAkAHQAPQAoACQAXwAuAFMAaQB6AGUALwAkAGcAKQA7AFcAcgBpAHQAZQAtAEgAbwBzAHQAIAAoACQAdAAtACQAZgApACwAJABmAH0ACgA="`) DO ((SET U=%%f)&(SET F=%%g))
+set getDiskEncodeps1= CgBnAHcAbQBpACAAVwBpAG4AMwAyAF8ATABvAGcAaQBjAGEAbABEAGkAcwBrACAALQBGAGkAbAB0AGUAcgAgACIAQwBhAHAAdABpAG8AbgA9ACcAQwA6ACcAIgB8ACUAewAkAGcAPQAxADAANwAzADcANAAxADgAMgA0ADsAWwBpAG4AdABdACQAZgA9ACgAJABfAC4ARgByAGUAZQBTAHAAYQBjAGUALwAkAGcAKQA7AFsAaQBuAHQAXQAkAHQAPQAoACQAXwAuAFMAaQB6AGUALwAkAGcAKQA7AFcAcgBpAHQAZQAtAEgAbwBzAHQAIAAoACQAdAAtACQAZgApACwAJABmAH0ACgA=
+set getRamEncodeps1= JABGAHIAZQBlAFIAYQBtACAAPQAgACgAWwBtAGEAdABoAF0AOgA6AFQAcgB1AG4AYwBhAHQAZQAoACgARwBlAHQALQBDAGkAbQBJAG4AcwB0AGEAbgBjAGUAIABXAGkAbgAzADIAXwBPAHAAZQByAGEAdABpAG4AZwBTAHkAcwB0AGUAbQApAC4ARgByAGUAZQBQAGgAeQBzAGkAYwBhAGwATQBlAG0AbwByAHkAIAAvACAAMQBLAEIAKQApADsAIAANAAoAJABUAG8AdABhAGwAUgBhAG0AIAA9ACAAKABbAG0AYQB0AGgAXQA6ADoAVAByAHUAbgBjAGEAdABlACgAKABHAGUAdAAtAEMAaQBtAEkAbgBzAHQAYQBuAGMAZQAgAFcAaQBuADMAMgBfAEMAbwBtAHAAdQB0AGUAcgBTAHkAcwB0AGUAbQApAC4AVABvAHQAYQBsAFAAaAB5AHMAaQBjAGEAbABNAGUAbQBvAHIAeQAgAC8AIAAxAE0AQgApACkAOwANAAoAJABVAHMAZQBkAFIAYQBtACAAPQAgACQAVABvAHQAYQBsAFIAYQBtACAALQAgACQARgByAGUAZQBSAGEAbQA7AA0ACgAkAEYAcgBlAGUAUgBhAG0AUABlAHIAYwBlAG4AdAAgAD0AIAAoACQARgByAGUAZQBSAGEAbQAgAC8AIAAkAFQAbwB0AGEAbABSAGEAbQApACAAKgAgADEAMAAwADsADQAKACQARgByAGUAZQBSAGEAbQBQAGUAcgBjAGUAbgB0ACAAPQAgACIAewAwADoATgAwAH0AIgAgAC0AZgAgACQARgByAGUAZQBSAGEAbQBQAGUAcgBjAGUAbgB0ADsADQAKACQAVQBzAGUAZABSAGEAbQBQAGUAcgBjAGUAbgB0ACAAPQAgACgAJABVAHMAZQBkAFIAYQBtACAALwAgACQAVABvAHQAYQBsAFIAYQBtACkAIAAqACAAMQAwADAAOwANAAoAJABVAHMAZQBkAFIAYQBtAFAAZQByAGMAZQBuAHQAIAA9ACAAIgB7ADAAOgBOADAAfQAiACAALQBmACAAJABVAHMAZQBkAFIAYQBtAFAAZQByAGMAZQBuAHQAOwANAAoAJABmAGkAbgBhAGwAPQAgACQAVQBzAGUAZABSAGEAbQAuAFQAbwBTAHQAcgBpAG4AZwAoACkAIAArACAAIgBNAEIAIAAvACAAIgAgACsAIAAkAFQAbwB0AGEAbABSAGEAbQAuAFQAbwBTAHQAcgBpAG4AZwAoACkAIAArACAAIgBNAEIAIAAiACAAKwAgACIAKAAiACAAKwAgACQAVQBzAGUAZABSAGEAbQBQAGUAcgBjAGUAbgB0AC4AVABvAFMAdAByAGkAbgBnACgAKQAgACsAIAAiACUAIgAgACsAIAAiACkAIgA7AA0ACgBXAHIAaQB0AGUALQBIAG8AcwB0ACAAJABmAGkAbgBhAGwA
 
-:: Boot time
-for /f %%a in ('WMIC OS GET lastbootuptime ^| find "."') DO set DTS=%%a 
-set BOOTTIME=%DTS:~0,4%-%DTS:~4,2%-%DTS:~6,2%  %DTS:~8,2%:%DTS:~10,2%
+:: Windows version
+for /f "usebackq delims=" %%a in (`powershell -Command "(Get-CimInstance Win32_OperatingSystem).Caption;"`) do Set version=%%a
+for /f "usebackq delims=" %%a in (`powershell -Command "(Get-CimInstance Win32_OperatingSystem).OSArchitecture;"`) do Set bits=%%a
+for /f "usebackq delims=" %%a in (`powershell -Command "(Get-CimInstance  Win32_OperatingSystem).Version;"`) do Set kernel=%%a
 
+::CPU
+for /f "usebackq delims=" %%a in (`powershell -Command "(((Get-CimInstance Win32_Processor).Name) -replace '\s+', ' ');"`) do Set cpu=%%a
 
-:: GPU Name
-for /F "tokens=* skip=1" %%n in ('WMIC path Win32_VideoController get Name ^| findstr "."') do set GPU_NAME=%%n 
+::GPU
+for /f "usebackq delims=" %%a in (`powershell -Command "(Get-CimInstance Win32_DisplayConfiguration).DeviceName;"`) do Set gpu=%%a
 
-:: x86 x64
-IF EXIST "%PROGRAMFILES(X86)%" (set bit=x64) ELSE (set bit=x86) 
+::Board
+for /f "usebackq delims=" %%a in (`powershell -Command "(Get-CimInstance Win32_BaseBoard | Select-Object Manufacturer, Product).Product;"`) do Set moboP=%%a
+for /f "usebackq delims=" %%a in (`powershell -Command "(Get-CimInstance Win32_BaseBoard | Select-Object Manufacturer, Product).Manufacturer;"`) do Set moboM=%%a
 
-::Disk space
+::RAM
+for /f "usebackq delims=" %%a in (`PowerShell -NoProfile -EncodedCommand "%getRamEncodeps1%"`) do Set ram=%%a
+
+::Disk
+for /F "usebackq tokens=1,2" %%f IN (`PowerShell -NoProfile -EncodedCommand "%getDiskEncodeps1%"`) DO ((SET U=%%f)&(SET F=%%g))
 set /a total=%F%+%U%
-:: In line 56 have a error format in github code viewer
-set ESC=
-set RD=%ESC%[31m
-set GN=%ESC%[32m
-set YW=%ESC%[33m
-set BL=%ESC%[34m
+
+::Names
+for /f "usebackq delims=" %%a in (`powershell -Command "[System.Net.Dns]::GetHostName();"`) do Set userinfo=%%a
+for /f "usebackq delims=" %%a in (`powershell -Command "$env:USERNAME"`) do Set username=%%a
+
+::Screen
+for /f "usebackq delims=" %%a in (`powershell -Command "(Get-WmiObject -Class Win32_VideoController).CurrentRefreshRate"`) do Set hz=%%a
+for /f "usebackq delims=" %%a in (`powershell -Command "(Get-WmiObject -Class Win32_VideoController).CurrentHorizontalResolution"`) do Set hozrs=%%a
+for /f "usebackq delims=" %%a in (`powershell -Command "(Get-WmiObject -Class Win32_VideoController).CurrentVerticalResolution"`) do Set verrs=%%a
+
+
+:: UpTime
+for /f %%a in ('WMIC OS GET lastbootuptime ^| find "."') DO set DTS=%%a 
+set boot=%DTS:~0,4%-%DTS:~4,2%-%DTS:~6,2%  %DTS:~8,2%:%DTS:~10,2%
 
 
 cls
-echo %RD%                 
-echo %RD%            _,.-:--._ %GN%          		      
-echo %RD%           /::::::::::/ %GN%;--._...,_		      
-echo %RD%          /::::::::::/ %GN%/:::::::::/                  
-echo %RD%         /::::::::::/ %GN%/:::::::::/	      
-echo %RD%        /::::::::::/ %GN%/:::::::::/        %GN%OS: %version% (%bit%)         
-echo %RD%       /,.-:''-,_ / %GN%/:::::::::/      %GN%Drive: %Total% GB (C:)
-echo %BL%        _,.-:--._ %GN% /:-.:--:../         %GN%CPU: %name%
-echo %BL%      /::::::::::/ %YW%;--._...,_	       %GN%GPU: %GPU_NAME%
-echo %BL%     /::::::::::/ %YW%/:::::::::/   %GN%Resolution: %screenwidth% x %screenheight%
-echo %BL%    /::::::::::/ %YW%/:::::::::/	       %GN%RAM: %TotalPhysicalMemory% Bytes
-echo %BL%   /::::::::::/ %YW%/:::::::::/     %GN% Boot Time: %BOOTTIME%
-echo %BL%  /_,.--::-._/%YW% /:::::::::/
-echo %BL% ^           %YW%  /:-.:--:../
+echo [m 
+echo %logo1%      [1;34m%username%[m@[1;34m%userinfo%[m        
+echo %logo1%      ---------------------
+echo %logo1%      [1;34mOS[m: %version% %bits%
+echo %logo1%      [1;34mKernel[m: %kernel%
+echo %logo1%      [1;34mCPU[m: %cpu% 
+echo [m                                  [1;34mMotherboard[m: %moboM% %moboP% 
+echo %logo2%	  [1;34mRAM[m: %ram%  
+echo %logo2%      [1;34mDisk[m:  %U%GB / %total%GB  (C:)
+echo %logo2%      [1;34mGPU[m: %gpu%
+echo %logo2%      [1;34mResolution[m: %hozrs% x %verrs% (%hz% Hz)
+echo %logo2%      [1;34mBoot[m: %boot%
 echo:
-echo %GN% - github.com/SegoCode
 
 pause > nul
-exit
