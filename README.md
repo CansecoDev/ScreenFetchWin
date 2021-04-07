@@ -7,9 +7,11 @@ Differences between **ScreenFetchWin** and [Windows-screenFetch](https://github.
 
 <img width="900" src="https://github.com/SegoCode/ScreenFetchWin/blob/master/media/demo.png" />
 
-### ScreenFetchWin Copland version
+<details> 
+  <summary>ScreenFetchWin Copland version </summary>
+  
+  <img width="900" src="https://github.com/SegoCode/ScreenFetchWin/blob/master/media/demo-Copland.png" />
 
-<img width="900" src="https://github.com/SegoCode/ScreenFetchWin/blob/master/media/demo-Copland.png" />
-
+</details> 
 Download release: https://github.com/SegoCode/ScreenFetchWin/releases/ 
 
